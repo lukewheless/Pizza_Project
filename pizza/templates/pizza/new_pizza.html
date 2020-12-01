@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<p><a href="{% url 'pizza:new_pizza' pizza.id %}">{{ pizza.id }}</a></p>
+<p><a href="{% url 'pizza:pizza' pizza.id %}">{{ pizza.id }}</a></p>
 
 <p>Add a new pizza:</p>
 
@@ -11,7 +11,7 @@
     {% csrf_token %}
     {{ form.as_p }}
 
-    <button name="submit">Add pizza</button>
+    <button name="submit">Add Pizza</button>
 </form>
 
 {% endblock content %}

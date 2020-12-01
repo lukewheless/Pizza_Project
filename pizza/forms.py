@@ -3,13 +3,13 @@ from.models import Pizza, Topping
 
 class PizzaForm(forms.ModelForm):
     class Meta:
-        model = Topic 
-        fields = ['text']
-        labels = {'text':''}
+        model = Pizza 
+        fields = ['name']
+        labels = {'name':''}
 
 class ToppingEntry(forms.ModelForm):
     class Meta:
-        model = Entry
-        fields = ['text']
-        labels = {'text':''}
-        widgets = {'text': forms.Textarea(attrs={'cols': 80})}
+        model = Topping
+        fields = ['topping']
+        labels = {'topping':''}
+        widgets = {'topping': forms.Textarea(attrs={'cols': 80})}

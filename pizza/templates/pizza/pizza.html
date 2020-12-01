@@ -2,12 +2,12 @@
 
 {% block content %} 
 
-<p>Topics</p>
+<p>Pizzas</p>
 
 <ul>
     {% for p in pizzas %}
 
-    <li> <a href="{% url 'pizza:pizza' pizza.id %}">{{ pizza }}</a> </li> 
+    <li> <a href="{% url 'pizza:pizza' pizza.id %}">{{ pizza.id }}</a> </li> 
     {% empty %}
         <li> No pizzas have been added yet.</li>
     {% endfor %}

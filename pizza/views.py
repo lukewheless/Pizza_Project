@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Topic
-from .forms import TopicForm, NewEntry
+from .models import Pizza
+from .forms import PizzaForm, ToppingEntry
 
 # Create your views here.
 def index(request):
@@ -21,7 +21,7 @@ def topping(request, pizza_id):
 
     context = {'pizza': pizza, 'toppings': toppings}
 
-    return render(request,'pizza/toppings.html', context)
+    return render(request,'pizza/topping.html', context)
 
 #get read data from database
 #post sends data to database
