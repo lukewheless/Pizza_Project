@@ -16,7 +16,7 @@ def pizza(request):
 
 #individual toppings
 def topping(request, pizza_id):
-    pizza = Pizza.objects.get(id=topic_id)
+    pizza = Pizza.objects.get(id=pizza_id)
     toppings = pizza.entry_set.order_by("-date_added") # desc order (-)
 
     context = {'pizza': pizza, 'toppings': toppings}
@@ -41,8 +41,8 @@ def new_pizza(request):
 
     return render(request, 'pizza/new_pizza.html', context)
 
-def new_topping(request, topic_id):
-    pizza = Pizza.objects.get(id=topic_id)
+def new_topping(request, pizza_id):
+    pizza = Pizza.objects.get(id=pizza_id)
     if request.method != 'POST':
         form = PizzaForm() #blank form
     else:
@@ -51,7 +51,7 @@ def new_topping(request, topic_id):
         if form.is_valid():
             new_topping = form.save(commit=False)     #saves form directly to topic model
 
-            new_topping.topic = topic
+            new_topping.pizza = pizza
             new_topping.save()
             form.save()
             return redirect('pizza:topping',pizza_id=pizza_id)
@@ -59,18 +59,18 @@ def new_topping(request, topic_id):
     context = {'form':form, 'pizza':pizza}
     return render(request, 'pizza/new_topping.html', context)
 
-    def edit_entry(request, entry_id):
-    entry = Entry.objects.get(id=entry_id)
-    topic = entry.topic
+    def edit_topping(request, topping_id):
+    topping = ToppingEntry.objects.get(id=topping_id)
+    pizza = topping.pizza
 
     if request.method != 'POST':
-        form = EntryForm(instance=entry) # loads form with existing entry 
+        form = EntryForm(instance=topping) # loads form with existing entry 
     else:
-        form = EntryForm(instance=entry, data=request.POST) 
+        form = EntryForm(instance=topping, data=request.POST) 
 
         if form.is_valid():
             form.save()
-            return redirect('learning_logs:topic', t_id=topic.id) 
+            return redirect('pizza:pizza', pizza_id=pizza.id) 
     
-    context = {'entry':entry, 'topic':topic, 'form':form} #function of context that shows us a view of data we want to see
-    return render(request, 'learning_logs/edit_entry.html', context)
+    context = {'topping':topping, 'pizza':pizza, 'form':form} #function of context that shows us a view of data we want to see
+    return render(request, 'pizza/edit_topping.html', context)

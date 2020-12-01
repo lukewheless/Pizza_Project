@@ -6,7 +6,7 @@ class Pizza(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def _str_(self):
-        return self.text
+        return self.name
 
 class Topping(models.Model):
     pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE)
@@ -19,4 +19,4 @@ class Topping(models.Model):
         verbose_name_plural = 'toppings'
 
     def _str_(self):
-        return f"{self.text[:50]}..."
+        return f"{self.name[:50]}..."

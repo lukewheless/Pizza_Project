@@ -6,7 +6,7 @@
 
     <p>Edit Toppings:</p>
 
-    <form action="{%url 'pizza:edit_topping' topping.id %}" method='post'>
+    <form action="{%url 'pizza:edit_topping' entry.id %}" method='post'>
         {% csrf_token %}
         {{ form.as_p }}
 
