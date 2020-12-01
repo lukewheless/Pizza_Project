@@ -58,3 +58,19 @@ def new_topping(request, topic_id):
     
     context = {'form':form, 'pizza':pizza}
     return render(request, 'pizza/new_topping.html', context)
+
+    def edit_entry(request, entry_id):
+    entry = Entry.objects.get(id=entry_id)
+    topic = entry.topic
+
+    if request.method != 'POST':
+        form = EntryForm(instance=entry) # loads form with existing entry 
+    else:
+        form = EntryForm(instance=entry, data=request.POST) 
+
+        if form.is_valid():
+            form.save()
+            return redirect('learning_logs:topic', t_id=topic.id) 
+    
+    context = {'entry':entry, 'topic':topic, 'form':form} #function of context that shows us a view of data we want to see
+    return render(request, 'learning_logs/edit_entry.html', context)

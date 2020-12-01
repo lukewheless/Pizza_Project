@@ -2,13 +2,15 @@
 
 {% block content %}
 
-<p>Add a new pizza:</p>
+<p><a href="{% url 'pizza:pizza' pizza.id %}">{{ topic.id }}</a></p>
 
-<form action="{%url 'pizza:new_topping' %}" method='post'>
+<p>Add a new toppings:</p>
+
+<form action="{%url 'pizza:new_entry' pizza.id %}" method='post'>
     {% csrf_token %}
     {{ form.as_p }}
 
-    <button name="submit">Add pizza</button>
+    <button name="submit">Add Topping</button>
 </form>
 
 {% endblock content %}
