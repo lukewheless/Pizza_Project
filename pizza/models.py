@@ -10,7 +10,7 @@ class Pizza(models.Model):
 
 class Topping(models.Model):
     pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE)
-    topping = models.TextField()
+    name = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
     
     #allows to set it to toppings when more than one topping is added
