@@ -10,6 +10,6 @@ class PizzaForm(forms.ModelForm):
 class ToppingEntry(forms.ModelForm):
     class Meta:
         model = Topping
-        fields = ['topping']
-        labels = {'topping':''}
-        widgets = {'topping': forms.Textarea(attrs={'cols': 80})}
+        fields = ['name']
+        labels = {'name':''}
+        widgets = {'name': forms.Textarea(attrs={'cols': 80})}
