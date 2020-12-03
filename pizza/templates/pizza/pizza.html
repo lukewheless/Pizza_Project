@@ -1,4 +1,4 @@
-{% extends "pizzas/base.html" %}
+{% extends "pizza/base.html" %}
 
 {% block content%}
     <p>Pizza: {{ pizza.name }}</p>
@@ -6,13 +6,13 @@
         {% for t in toppings %}
         <li>
             <p>{{ t.name|linebreaks }}</p>
-            <p> <a href="{% url 'pizzas:edit_topping' topping.id %}">Edit topping</a></p>
+            <p> <a href="{% url 'pizza:edit_topping' topping.id %}">Edit topping</a></p>
         </li>
         {% empty %}
             <li>No toppings for this pizza have been added yet.</li>
         {% endfor %}
     </ul>
-    <p><a href="{% url 'pizzas:new_topping' pizza.id %}">Add a new topping</a></p>
+    <p><a href="{% url 'pizza:new_topping' pizza.id %}">Add a new topping</a></p>
     <ul>
         {% for c in comments %}
         <li>
@@ -23,6 +23,6 @@
         {% endfor %}
         </li>
     </ul>
-    <p><a href="{% url 'pizzas:new_comment' pizza.id %}">Add a new comment</a></p>
+    <p><a href="{% url 'pizza:new_comment' pizza.id %}">Add a new comment</a></p>
     
 {% endblock content %}
