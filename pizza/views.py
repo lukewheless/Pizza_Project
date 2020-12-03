@@ -23,7 +23,7 @@ def pizza(request, pizza_id):
 
 #get read data from database
 #post sends data to database
-def new_pizza(request, pizza_id):
+def new_pizza(request):
     if request.method != 'POST':
         form = PizzaForm()                  #blank form
     else:
