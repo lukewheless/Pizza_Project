@@ -6,7 +6,7 @@
 
 <p>Add a new toppings:</p>
 
-<form action="{%url 'pizza:new_entry' pizza.id %}" method='post'>
+<form action="{%url 'pizza:new_topping' pizza.id %}" method='post'>
     {% csrf_token %}
     {{ form.as_p }}
 
