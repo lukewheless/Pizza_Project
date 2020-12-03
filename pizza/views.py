@@ -32,7 +32,7 @@ def new_pizza(request):
         if form.is_valid():
             form.save()                     #saves form directly to topic model
 
-            return redirect('pizza:pizzas') #FLAG THIS (s)
+            return redirect('pizza:pizza') 
     
     context = {'form':form}
     return render(request, 'pizza/new_pizza.html', context)
