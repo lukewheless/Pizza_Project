@@ -12,7 +12,7 @@ def pizzas(request):
     
     context = {'Pizzas': pizzas}
 
-    return render(request,'pizza/pizza.html', context)
+    return render(request,'pizza/pizzas.html', context)
 
 def pizza(request, pizza_id):
     pizza = Pizza.objects.get(id=pizza_id)
