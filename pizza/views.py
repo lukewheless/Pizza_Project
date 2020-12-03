@@ -10,8 +10,7 @@ def index(request):
 def pizzas(request):
     pizzas = Pizza.objects.order_by("-date_added")
     
-    context = {'Pizzas': pizzas}
-
+    context = {'pizzas': pizzas}
     return render(request,'pizza/pizzas.html', context)
 
 def pizza(request, pizza_id):
@@ -19,8 +18,7 @@ def pizza(request, pizza_id):
     topping = pizza.topping_set.order_by("-date_added") # desc order (-)
     comment = pizza.comment_set.order_by('-date_added')
     
-    context = {'pizza': pizza, 'toppings': topping, 'comments': comment}
-
+    context = {'pizza': pizza, 'topping': topping, 'comment': comment}
     return render(request,'pizza/pizza.html', context)
 
 #get read data from database
@@ -37,7 +35,6 @@ def new_pizza(request, pizza_id):
             return redirect('pizza:pizzas') #FLAG THIS (s)
     
     context = {'form':form}
-
     return render(request, 'pizza/new_pizza.html', context)
 
 def new_topping(request, pizza_id):
@@ -54,11 +51,8 @@ def new_topping(request, pizza_id):
             return redirect('pizza:pizza', pizza_id=pizza_id)
     
     context = {'form':form, 'pizza':pizza}
-
     return render(request, 'pizza/new_topping.html', context)
     
-    context = {'form':form, 'pizza':pizza}
-    return render(request, 'pizza/new_topping.html', context)
 
 def edit_topping(request, topping_id):
     topping = ToppingForm.objects.get(id=topping_id)
@@ -71,7 +65,7 @@ def edit_topping(request, topping_id):
 
     if form.is_valid():
         form.save()
-    return redirect('pizza:pizza', pizza_id=pizza.id) 
+        return redirect('pizza:pizza', pizza_id=pizza.id) 
     
     context = {'topping':topping, 'pizza':pizza, 'form':form} #function of context that shows us a view of data we want to see
     return render(request, 'pizza/edit_topping.html', context)
@@ -90,5 +84,4 @@ def comment(request, pizza_id):
             return redirect('pizza:pizza', pizza_id=pizza_id)
     
     context = {'form':form, 'pizza':pizza}
-
     return render(request, 'pizza/comment.html', context)
