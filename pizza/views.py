@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Pizza
+from .models import Pizza, Topping, Comment
 from .forms import PizzaForm, ToppingForm, CommentForm
 
 # Create your views here.
