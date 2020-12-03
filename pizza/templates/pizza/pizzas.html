@@ -2,13 +2,13 @@
 
 {% block content %} 
 
-<p>Pizza: {{ pizza.text }}</p>
+<p>Pizzas</p>
 
 <ul>
-    {% for p in pizza %}
+    {% for p in pizzas %}
 
     <li> 
-        <a href="{% url 'pizza:pizza' pizza.id %}">{{ topic.id }}</a>
+        <a href="{% url 'pizza:pizza' pizza.id %}">{{ pizza }}</a>
     </li>
     {% empty %}
     <li> There are no pizzas.</li>
