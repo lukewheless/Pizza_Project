@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Pizza
-from .forms import PizzaForm, ToppingForm
+from .forms import PizzaForm, ToppingForm, CommentForm
 
 # Create your views here.
 def index(request):
@@ -8,9 +8,9 @@ def index(request):
 
 #to get all pizzas
 def pizzas(request):
-    pizza = Pizza.objects.order_by("-date_added")
+    pizzas = Pizza.objects.order_by("-date_added")
     
-    context = {'Pizzas': pizza}
+    context = {'Pizzas': pizzas}
 
     return render(request,'pizza/pizza.html', context)
 
@@ -18,6 +18,7 @@ def pizza(request, pizza_id):
     pizza = Pizza.objects.get(id=pizza_id)
     topping = pizza.topping_set.order_by("-date_added") # desc order (-)
     comment = pizza.comment_set.order_by('-date_added')
+    
     context = {'pizza': pizza, 'toppings': topping, 'comments': comment}
 
     return render(request,'pizza/pizza.html', context)
@@ -31,9 +32,9 @@ def new_pizza(request, pizza_id):
         form = PizzaForm(data=request.POST) #all info from user onto form
 
         if form.is_valid():
-            form.save()                        #saves form directly to topic model
+            form.save()                     #saves form directly to topic model
 
-            return redirect('pizza:pizza')
+            return redirect('pizza:pizzas') #FLAG THIS (s)
     
     context = {'form':form}
 
@@ -64,9 +65,9 @@ def edit_topping(request, topping_id):
     pizza = topping.pizza
 
     if request.method != 'POST':
-        form = EntryForm(instance=topping) # loads form with existing entry 
+        form = ToppingForm(instance=topping) # loads form with existing entry 
     else:
-        form = EntryForm(instance=topping, data=request.POST) 
+        form = ToppingForm(instance=topping, data=request.POST) 
 
     if form.is_valid():
         form.save()
@@ -90,4 +91,4 @@ def comment(request, pizza_id):
     
     context = {'form':form, 'pizza':pizza}
 
-    return render(request, 'pizza/new_topping.html', context)
+    return render(request, 'pizza/comment.html', context)
