@@ -9,7 +9,7 @@ def index(request):
 #to get all pizzas
 def pizzas(request):
     pizzas = Pizza.objects.order_by("-date_added")
-    
+
     context = {'pizzas': pizzas}
     return render(request,'pizza/pizzas.html', context)
 
