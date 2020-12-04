@@ -1,7 +1,18 @@
 {% extends "pizza/base.html" %}
 
-{% block content %}
+{% block page_header %}
+    <div class="jumbotron">
+        <h1 class="display-3">Hot Pizza Now!</h1>
 
-<p>Pizza Project</p>
+        <p class="lead">Select your pizza then select your favorite toppings. Feel free to write a
+            review on pizza you ordered!</p>
 
-{% endblock content %}
+        <a class="btn btn-lg btn-primary" href="{% url 'pizza:pizzas' %}"
+            role="button">Pizzas &raquo;</a>
+    </div>
+
+    <p>
+        <img src="https://ichef.bbci.co.uk/news/1024/cpsprodpb/4016/production/_112360461_gettyimages-1083704790.jpg" alt="Pizza">
+    </p>
+
+{% endblock page_header %}
