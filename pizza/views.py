@@ -7,27 +7,26 @@ def index(request):
     return render(request,'pizza/index.html')
 
 #to get all pizzas
-def pizzas(request):
+def pizzas(request): # Django creates an HttpRequest object that contains metadata about the request
     pizzas = Pizza.objects.order_by("-date_added")
 
-    context = {'pizzas': pizzas}
-    return render(request,'pizza/pizzas.html', context)
+    context = {'pizzas': pizzas}                        # value mapping that is passed to a template 
+    return render(request,'pizza/pizzas.html', context) # html path to pizzas
 
 def pizza(request, pizza_id):
-    pizza = Pizza.objects.get(id=pizza_id)
+    pizza = Pizza.objects.get(id=pizza_id)              # get() reads data from database
     topping = pizza.topping_set.order_by("-date_added") # desc order (-)
     comment = pizza.comment_set.order_by('-date_added')
     
     context = {'pizza': pizza, 'topping': topping, 'comment': comment}
     return render(request,'pizza/pizza.html', context)
 
-#get read data from database
-#post sends data to database
+
 def new_pizza(request):
-    if request.method != 'POST':
-        form = PizzaForm()                  #blank form
+    if request.method != 'POST':            # post sends data to database
+        form = PizzaForm()                  # blank form
     else:
-        form = PizzaForm(data=request.POST) #all info from user onto form
+        form = PizzaForm(data=request.POST) # all info from user onto form
 
         if form.is_valid():
             form.save()                     #saves form directly to topic model
@@ -38,7 +37,7 @@ def new_pizza(request):
     return render(request, 'pizza/new_pizza.html', context)
 
 def new_topping(request, pizza_id):
-    pizza = Pizza.objects.get(id=pizza_id)
+    pizza = Pizza.objects.get(id=pizza_id)  # pulls from Pizza Model
 
     if request.method != 'POST':
         form = ToppingForm()
