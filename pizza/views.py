@@ -29,7 +29,9 @@ def new_pizza(request):
         form = PizzaForm(data=request.POST) # all info from user onto form
 
         if form.is_valid():
-            form.save()                     #saves form directly to topic model
+            new_pizza = form.save(commit=False)
+            new_pizza.pizza = pizza 
+            new_pizza.save()                    
 
             return redirect('pizza:pizza') 
     
@@ -45,7 +47,9 @@ def new_topping(request, pizza_id):
         form = ToppingForm(data=request.POST) 
 
         if form.is_valid():
-            form.save()     
+            new_topping = form.save(commit=False)
+            new_topping.pizza = pizza
+            new_topping.save()   
 
             return redirect('pizza:pizza', pizza_id=pizza_id)
     
@@ -78,7 +82,9 @@ def comment(request, pizza_id):
         form = CommentForm(data=request.POST) 
 
         if form.is_valid():
-            form.save()     
+            comment = form.save(commit=False)
+            comment.pizza = pizza  
+            comment.save() 
 
             return redirect('pizza:pizza', pizza_id=pizza_id)
     
